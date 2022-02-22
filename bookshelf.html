@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <link rel="stylesheet" href="./styles/styles.css">
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <style>
+        body{
+            margin: 0;
+        }
+        main{
+            border-radius: 15px;
+            margin: 15px 15px 0px;
+            background-color: rgb(165, 87, 42);
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            align-items: center;
+        }
+        main > div{
+            margin: 10px 0px;
+            display: flex;
+            justify-content: space-around;
+            background-color: #712b01;
+            width: 90%;
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        .heading-btn{
+            border: 2px solid rgb(182, 27, 0);
+            background-color: rgb(223, 186, 118);
+            color: rgb(129, 57, 16);
+            padding: 10px;
+            width: 55%;
+            font-size: large;
+            margin: 5px 0px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+           var name = sessionStorage.getItem("username");
+           if(name == null || name == "")
+           {
+               window.location.href = "./index.html";
+           }
+           $('#nametext').text(name.toLocaleUpperCase()+"'s BookShelf");
+       });
+       
+   </script>
+</head>
+<body>
+    <header class="bg-brown">   
+        <h1>JBIT</h1>
+        <img src="./images/user-profile.jpg" width="50px" onclick="window.location.href = './redeem.html'" style="position: absolute;right: 25px;border-radius: 10px;border: 2px solid rgb(207, 93, 0);cursor: pointer;"/>
+    </header>
+    <main>
+        <button id="nametext" class="heading-btn">Jane's BookShelf</button>
+        <div>
+            <img src="./images/bookshelf-1.jpg" width="100vw"> <img src="./images/bookshelf-2.jpg" width="100vw">
+        </div>
+        <div>
+            <img src="./images/bookshelf-3.jpg" width="100vw"> <p style="width: 100px;"></p>
+        </div>
+        <div>
+            <p></p> <p></p>
+        </div>
+        <div>
+            <p></p> <p></p>
+        </div>
+    </main>
+</body>
+</html>
