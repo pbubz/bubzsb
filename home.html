@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,300;1,500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script>
+         $(document).ready(function(){
+            var name = sessionStorage.getItem("username");
+            if(name == null || name == "")
+            {
+                window.location.href = "./index.html";
+            }
+            $('#nametext').text(name.toLocaleUpperCase()+"?");
+        });        
+    </script>
+</head>
+<body>
+    <header class="bg-brown">   
+        <h1>JBIT</h1>
+        <img src="./images/user-profile.jpg" width="50px" onclick="window.location.href = './redeem.html'" style="position: absolute;right: 25px;border-radius: 10px;border: 2px solid rgb(207, 93, 0);cursor: pointer;"/>
+    </header>
+    <!-- main start -->
+    <main>
+        <p>What would you like to do today,</p>
+        <p id="nametext">Jane Doe?</p>
+        <div class="flex-space">
+            <a href="./bookmenu.html"><img class="home-buttons" src="./images/home-1.JPG"></a>
+            <img class="home-buttons" src="./images/home-2.JPG">
+            <a href="./bookshelf.html"><img class="home-buttons" src="./images/home-3.JPG"></a>
+        </div>
+        <div class="flex-space">
+            <a href="./groups.html"><img class="home-buttons" src="./images/home-4.JPG"></a>
+            <a href="./redeem.html"><img class="home-buttons" src="./images/home-5.JPG"></a>
+        </div>
+        <div class="bg-light-brown full-container" style="position: absolute;text-align: center;bottom: 0;height: 40%; border-radius: 25px 25px 0px 0px;">
+            <button style="padding:20px 40px; background-color: transparent;border: solid 4px white; color: white; font-size: 16px;">NEW RELEASES</button>
+            <p style="width: 80%;">Oops! Unfortunately we do not have any new releases at this time.</p>
+            <p>Check back in soon.</p>
+        </div>
+    </main>   
+    <!-- main end --> 
+</body>
+</html>
