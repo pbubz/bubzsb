@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <link rel="stylesheet" href="./styles/styles.css">
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <!-- Embedded CSS -->
+    <style>        
+        .starpoints-div{
+            border-radius: 15px;
+            border: none;
+            background-color: rgb(0, 134, 223);
+            color: white;
+            padding: 10px;
+            width: 55%;
+            font-size: large;
+            margin: 5px 0px;
+        }
+        .starpoints-div h1{
+            margin: 2px;
+        }
+        .overlay-container{
+            position:fixed;
+            top: 35%;
+            left: 5vw;
+            width: 80%;
+            padding: 20px;
+            background-color: #ffcd92;
+            z-index: 1;
+        }
+        #blur{
+            position:fixed;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.45);
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }   
+        #closeoverlay{
+            color: red;
+            border: none;
+            background-color: transparent;
+            font-size: 28px;
+            font-weight: bold;
+        }     
+    </style>
+    <script>
+        $(document).ready(function(){
+            var name = sessionStorage.getItem("username");
+            if(name == null || name == "")
+            {
+                window.location.href = "./index.html";
+            }
+            $('#nametext').text(name.toLocaleUpperCase());
+            $("#blur").toggle();
+            $(".overlay-container").toggle();            
+        });
+        function toggleOverlay(){
+            $('#blur').toggle();
+            $('.overlay-container').toggle();
+        }
+        function uploadImage()
+        {
+            var formData = new FormData();
+            var files = $('#file1')[0].files; 
+            console.log(files);
+            for (var i = 0; i < files.length; i++) {                
+                var file = files[i];
+                console.log(file);
+                var name = files[0].name;
+                console.log(name);
+                formData.append('myfile', file, name);
+            }
+            var settings = {
+                "data": formData,
+                "url": "https://jbitdb-46c9.restdb.io/media",
+                "method": "POST",
+                "contentType": false,
+                "headers": {                    
+                    "content-type": "application/json",
+                    "x-apikey": "a2ef0ee5acd82cdd27794598d5d70fa8575c5",
+                    "cache-control": "no-cache"
+                },  
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);                
+            });
+        }
+    </script>
+</head>
+<body>
+    <header class="bg-brown">   
+        <h1>JBIT</h1>
+    </header>
+    <!-- main start -->
+    <main style="padding: 10px;">
+        <div style="display: flex;align-self: start;">
+            <div>
+                <img src="./images/user-profile.jpg" width="100px" style="border-radius: 10px;border: 2px solid rgb(207, 93, 0);"/>
+                <p style="font-size: small;text-decoration: underline;" onclick="toggleOverlay()">Edit Profile picture</p>
+            </div>
+            <h4 id="nametext">Jane Doe</h4>
+        </div>        
+        <div class="starpoints-div">
+            <h1>&#9733; <strong>20</strong></h1>
+            <h3>Star Points</h3>
+            <p>Earn points by scoring on quizzes after reading books!</p>
+        </div>        
+    </main>   
+    <!-- main end -->
+    <h2 class="strip-heading">Redeem rewards</h2>
+    <div class="images-sequence">
+        <div>
+            <div class="box">
+                <img src="./images/arts-1.jpg">
+                <h2 class="centered background-fill" style="background-color: orangered;">Education</h2>
+            </div>
+        </div>
+        <div>
+            <div class="box">
+                <img src="./images/arts-2.jpg">
+                <h2 class="centered background-fill" style="background-color: orangered;">Painters Unite</h2>
+            </div>
+        </div>
+        <div>
+            <div class="box">
+                <img src="./images/arts-3.jpg">
+                <h2 class="centered background-fill" style="background-color: orangered;">Education</h2>
+            </div>
+        </div>
+    </div>
+    <h2 class="strip-heading">Achievements</h2> 
+    <div class="achievements-section">
+        <button class="bg-light-blue curved-button full-width align-left">Read 10 books</button>
+        <button class="bg-light-blue curved-button full-width align-left">Make 10 friends</button>
+        <button class="bg-light-blue curved-button full-width align-left">Join 2 groups</button>
+        <button class="bg-light-blue curved-button full-width align-left">Complete a collection</button>
+    </div>
+    <!-- Overlay Container that appears onclicking change profile picture -->
+    <div id="blur">
+        <div class="overlay-container">
+            <div style="display: flex; justify-content: space-between;">
+                <h2>Upload Profile Picture</h2>
+                <button id="closeoverlay" onclick="toggleOverlay()">x</button>
+            </div>
+            <input type="file" id="file1">
+            <button class="curved-button" onclick="uploadImage()">UPLOAD</button>
+        </div>
+    </div>
+</body>
+</html>
