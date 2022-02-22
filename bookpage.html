@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,300;1,500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>   
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script>
+        google.books.load({"language":"en"});
+
+        function nextStep(viewer){
+          window.setTimeout(function(){
+            viewer.nextPage()
+            nextStep(viewer);
+          },3000)
+        }
+
+        function alertNotFound(){
+          alert("Book not found!");
+        }
+        var viewer;
+        $(document).ready(function(){  
+            var urlStr = window.location.href;
+            var url = new URL(urlStr);
+            var bookid = url.searchParams.get("id");
+            function create(){
+                viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
+                viewer.load(bookid,alertNotFound);
+            }
+            google.books.setOnLoadCallback(create);
+        })
+      </script>
+</head>
+<body>
+    <header class="bg-brown">   
+        <h1>JBIT</h1>
+        <img src="./images/user-profile.jpg" width="50px" style="position: absolute;right: 25px;border-radius: 10px;border: 2px solid rgb(207, 93, 0);"/>
+    </header>
+    <main>
+        <div id="viewerCanvas" style="width: 80%; height: 88vh; overflow: hidden;"></div>
+        <div class="search-container" style="justify-content: space-around; padding:5px 0px;position: absolute;bottom: 0;">            
+            <a href="javascript:viewer.previousPage()"><button>Back</button></a>
+            <a href="javascript:viewer.nextPage()"><button>Next</button></a>
+            <a href="./bookmenu.html"><button>Exit</button></a>
+        </div>              
+    </main>   
+</body>
+</html>
