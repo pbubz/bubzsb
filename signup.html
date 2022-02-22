@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,300;1,500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script>
+        function registerUser()
+        {
+            if($('#password').val() == "" || $('#password-repeat').val() == "" || $('#username').val() == ""|| $('#name').val() == "")
+            {
+                $('#error').text("Error: Missing Field(s)");
+                return;
+            }
+            if($('#password').val() != $('#password-repeat').val())
+            {
+                $('#error').text("Error: Password doesn't match");
+                return;
+            }
+            var myHeaders = new Headers();
+            myHeaders.append("x-apikey", "a2ef0ee5acd82cdd27794598d5d70fa8575c5");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "name": $('#name').val(),
+                "username": $('#username').val(),
+                "email": $('#name').val()+"@gmail.com",
+                "password": $('#password').val(),
+                "active": true
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("https://jbitdb-46c9.restdb.io/rest/users", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                $('#error').text("");
+                $('#result').text("Registered");
+            })
+            .catch(error => {
+                console.log('error', error);
+                $('#error').text("Error: Seems like username is already used.");
+            });
+        }
+    </script>
+</head>
+<body class="bg-brown">
+    <div class="container">
+        <h1>JBIT</h1>
+        <br>
+        <input placeholder="name" id="name">
+        <input placeholder="username" id="username">
+        <input type="password" placeholder="password" id="password">
+        <input type="password" placeholder="confirm" id="password-repeat">
+        <button class="bg-blue curved-button" onclick="registerUser()"> Sign Up </button>
+        <p id="result" style="color: green;"></p>
+        <p id="error" style="color: red;"></p>
+    </div>
+</body>
+</html>
