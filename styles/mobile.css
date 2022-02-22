@@ -1,0 +1,46 @@
+/* Small LCD */
+@media screen and (max-width: 899px) {
+    .centered h1{
+        font-size: 20px;
+    }
+    .centered h2{
+        font-size: 16px;
+    }
+}
+/* Tablet */
+@media screen and (max-width: 680px) {
+    a {
+        font-size: 14px;
+    }
+    .images-sequence > div{
+        margin: 0px 10% !important;        
+    }
+    .books-container > *{
+        width: 33% !important;
+    }
+}
+/* Mobile */
+@media screen and (max-width: 500px) {
+    .container img{
+        margin-top: 81px;
+    }
+    nav span, i, .centered h2{
+        display: none;
+    }
+    nav{
+        display: flex;
+        flex-direction: column;
+    }
+    .images-sequence > div{
+        margin: 0px 5% !important;        
+    }
+    .search-container button{
+        padding: 7px 20px !important;
+    }
+    .books-container > *{
+        margin: 15px !important;
+    }
+    .home-buttons{
+        width: 80px !important;
+    }
+}
