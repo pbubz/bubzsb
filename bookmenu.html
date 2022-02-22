@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBIT</title>    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,300;1,500&display=swap" rel="stylesheet">
+    <linK rel="stylesheet" href="./styles/mobile.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>    
+    <script type="text/javascript" src="./script/booksload.js"></script>
+    <script>
+        window.onload = function(e){             
+            console.log("Hello");
+            e.preventDefault();
+            console.log("bookName");                  
+            $.get("https://www.googleapis.com/books/v1/volumes?q=q=science+subject?filter=free-ebooks?maxResults=15", 
+                function(response){
+                    console.log(response.totalItems);
+                    console.log(response.items);
+                    response.items.forEach(book => {
+                        img = $('<img id='+book.id+' onclick="openBook(this)"/></a>');
+                        console.log(book.id);
+                        url = book.volumeInfo.imageLinks.thumbnail;
+                        img.attr('src',url);
+                        img.appendTo('#result');
+                    });
+                })                  
+        }        
+        function openBook(e)
+        {
+            window.location.href = "./bookpage.html?id="+e.id;
+        }
+        function searchBook(e)
+        {
+            $('#result').empty();
+            e.preventDefault();
+            var bookName = $('#bookname').val();
+            console.log(bookName);                  
+            $.get("https://www.googleapis.com/books/v1/volumes?q="+bookName, 
+                function(response){
+                    console.log(response.totalItems);
+                    console.log(response.items);
+                    response.items.forEach(book => {
+                        img = $('<img id="books">');
+                        url = book.volumeInfo.imageLinks.thumbnail;
+                        img.attr('src',url);
+                        img.appendTo('#result');
+                    });
+                })                  
+        }
+        $(document).ready(function(){
+            $('#bookname').keyup(function(e){
+                if(e.keyCode == 13)
+                {
+                    searchBook(e);
+                }
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <header class="bg-brown">   
+        <h1>JBIT</h1>
+        <img src="./images/user-profile.jpg" width="50px" onclick="window.location.href = './redeem.html'" style="position: absolute;right: 25px;border-radius: 10px;border: 2px solid rgb(207, 93, 0);cursor: pointer;"/>
+    </header>
+    <!-- main start -->
+    <main>
+        <div class="search-container">
+            <input id="bookname" placeholder="search">
+            <button onclick="searchBook(event)">Go</button>
+        </div>                      
+    </main>   
+    <!-- main end -->
+    <p style="color: gray;text-align: left;margin-left: 20px;">Browse by: All Genre</p>
+    <div class="books-container" id="result">
+        <!-- This div will load the books dynamically -->
+    </div> 
+</body>
+</html>
