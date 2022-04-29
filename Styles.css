@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Open+Sans&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
+
+
+#heading{
+    font-family: 'Luckiest Guy';
+    font-size: 200%;
+    text-align: center;
+    color: #3f1573;
+    margin: 1.5%;
+}
+
+#board{
+    background-color: #f0e4ff;
+    padding: 4%;
+
+}
+.row{
+    display:flex;
+    justify-content: center; 
+    padding: 0.5%;
+}
+button{
+    padding: 2%;
+    margin:1%;
+    background-color: rgb(201, 119, 240);
+    border:none;
+    font-family: 'Passion One';
+    font-size: 150%;
+    color:#2e0f53;
+    cursor: pointer;
+}
